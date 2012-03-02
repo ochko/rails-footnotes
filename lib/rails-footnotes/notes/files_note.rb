@@ -35,7 +35,7 @@ module Footnotes
             @files.collect do |file|
               base_name = File.basename(file)
               asset_paths.each do |asset_path|
-                results = Dir[File.expand_path(base_name, asset_path) + '*']
+                results = Dir[File.expand_path(base_name.sub(/\.[a-z]+$/,'.'), asset_path) + '*']
                 results.each do |r|
                   linked_files << %[<a href="#{Footnotes::Filter.prefix(r, 1, 1)}">#{File.basename(r)}</a>]
                 end
